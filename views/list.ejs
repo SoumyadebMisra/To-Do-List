@@ -4,15 +4,18 @@
             <h1><%= titleList %></h1>
         </div>
         <div class="box">
-            <% for(let item of itemList){ %>
-                <div class="item">
-                    <input type="checkbox">
-                    <p><%= item %></p>
-                </div>
-            <%}%>
+            <% itemList.forEach((item)=>{ %>
+                <form action="/delete" method="post">
+                    <div class="item">
+                        <input type="checkbox" name="checkbox" value="<%= item._id %>" onclick="this.form.submit()">
+                        <p><%= item.name %></p>
+                    </div>
+                    <input type="hidden" name="listTitle" value="<%= titleList %>">
+                </form>
+            <%})%>
             <form class="item" action="/" method="post">
                 <input type="text" name="newListItem" placeholder="New Item" autocomplete="off">
-                <button type="submit" name="button" value = '<%= titleList %>'>+</button>
+                <button type="submit" name="list" value = '<%= titleList %>'>+</button>
             </form>
         </div>
     
